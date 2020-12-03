@@ -20,6 +20,13 @@ func _nss_http_setspent() C.enum_nss_status {
 	debugFnName("_nss_http_setspent")
 
 	if len(shadowEntries) == 0 {
+		hostname, err := getHostname()
+		if err != nil {
+			msg := fmt.Sprintf("NSS-HTTP.go: error getting system hostname: %s\n", err)
+			os.Stderr.WriteString(msg)
+			os.Exit(1)
+		}
+
 		resp, err := doRequest("shadow", hostname)
 		if err != nil {
 			msg := fmt.Sprintf("NSS-HTTP.go: error getting user data: %s\n", err)

@@ -20,6 +20,13 @@ func _nss_http_setgrent(stayopen C.int) C.enum_nss_status {
 	debugFnName("_nss_http_setgrent")
 
 	if len(groupEntries) == 0 {
+		hostname, err := getHostname()
+		if err != nil {
+			msg := fmt.Sprintf("NSS-HTTP.go: error getting system hostname: %s\n", err)
+			os.Stderr.WriteString(msg)
+			os.Exit(1)
+		}
+
 		resp, err := doRequest("group", hostname)
 		if err != nil {
 			msg := fmt.Sprintf("NSS-HTTP.go: error getting group data: %s\n", err)

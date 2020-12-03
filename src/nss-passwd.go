@@ -20,6 +20,13 @@ func _nss_http_setpwent() C.enum_nss_status {
 	debugFnName("_nss_http_setpwent")
 
 	if len(passwdEntries) == 0 {
+		hostname, err := getHostname()
+		if err != nil {
+			msg := fmt.Sprintf("NSS-HTTP.go: error getting system hostname: %s\n", err)
+			os.Stderr.WriteString(msg)
+			os.Exit(1)
+		}
+
 		resp, err := doRequest("passwd", hostname)
 		if err != nil {
 			msg := fmt.Sprintf("NSS-HTTP.go: error getting user data: %s\n", err)

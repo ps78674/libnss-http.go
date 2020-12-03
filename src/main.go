@@ -65,9 +65,7 @@ type config struct {
 
 var (
 	configFile = "/etc/nss_http.conf"
-
-	hostname string
-	conf     config
+	conf       config
 )
 
 func debugFnName(s string) {
@@ -190,14 +188,6 @@ func doRequest(reqType string, hostname string) ([]byte, error) {
 
 func init() {
 	readConfig()
-
-	var err error
-	hostname, err = getHostname()
-	if err != nil {
-		msg := fmt.Sprintf("NSS-HTTP.go: error getting system hostname: %s\n", err)
-		os.Stderr.WriteString(msg)
-		os.Exit(1)
-	}
 }
 
 func main() {}
