@@ -72,7 +72,7 @@ var (
 
 func debugFnName(s string) {
 	if conf.debug {
-		s = fmt.Sprintf("NSS-HTTP.go DEBUG: %s\n", s)
+		s = fmt.Sprintf("NSS-HTTP.go: called function %s\n", s)
 		os.Stderr.WriteString(s)
 	}
 }
