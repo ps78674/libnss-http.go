@@ -1,3 +1,7 @@
+***
+NSS library written in golang doesn't work because of dlopen() followed by fork(). This, for example, hangs on net.Dial(). 
+***
+
 **NSS module for rest/http.**
 
 **Configureation**\
