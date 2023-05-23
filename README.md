@@ -1,5 +1,6 @@
 ***
-NSS library written in golang doesn't work because of dlopen() followed by fork(). This, for example, hangs on net.Dial(). 
+**NSS library written in golang will not work properly because of a fork() in parent**. Go runtime is asynchronous and forking such a process is impossible.  
+This code hangs on goroutine in net.Dial().  
 ***
 
 **NSS module for rest/http.**
